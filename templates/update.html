@@ -1,0 +1,11 @@
+{% extends "index.html" %} {% block body %}
+<form action="">
+
+    {% csrf_token %}
+    {{form.as_p}}
+    <button class="submit" type="btn btn-danger">tesdiqle</button>
+
+
+
+</form>
+{% endblock body %}

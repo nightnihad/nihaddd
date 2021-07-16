@@ -1,0 +1,20 @@
+{% extends "index.html" %} {% load crispy_forms_tags %} {% load static %}
+<link rel="stylesheet" href="{% static 'css/style2.css' %}">{% block body %}
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <div class='content'>
+
+            <h3>Kayıt Ol</h3>
+            <hr>
+            <form method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    {{ form.as_p }}
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-info" type="submit">Register</button>
+                </div>
+        </div>
+    </div>
+
+    {% endblock body %}

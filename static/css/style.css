@@ -3,3 +3,41 @@ body {
     background-repeat: no-repeat, no-repeat;
     background-size: cover;
 }
+
+.content {
+    color: rgb(0, 0, 0);
+    text-align: center;
+    padding: 155px 0;
+}
+
+.container {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin-left: 250px;
+    border-radius: 10px;
+    background: rgb(167, 16, 16);
+    background: rgba(14, 119, 96, 0.5);
+}
+
+.context {
+    color: rgb(0, 0, 0);
+}
+
+.context p {
+    tab-size: 6px;
+}
+
+.bilgi-paylas {
+    position: relative;
+    font-family: "Avenir Next", sans-serif;
+    font-weight: 900;
+    font-size: 19px;
+    text-transform: uppercase;
+    font-style: italic;
+    letter-spacing: 0.05em;
+    display: inline-block;
+}
+
+.go-button:hover {
+    color: rgb(199, 25, 25);
+}

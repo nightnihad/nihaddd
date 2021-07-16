@@ -1,0 +1,8 @@
+{% extends "index.html" %} {% block body %}
+<form  method="POST">
+    {% csrf_token %} {{form.as_p}}
+                 <div class="form-group">
+                    <button class="btn btn-outline-info" type="submit">Register</button>
+                </div>
+</form>
+{% endblock body %}

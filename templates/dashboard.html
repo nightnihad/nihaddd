@@ -1,0 +1,8 @@
+{% extends "index.html" %}
+{% block body %}
+{% for Ent in Entri  %}
+ <p>{{Ent.name}} </p>  
+ <p>{{Ent.author}}</p>
+{% endfor %}
+
+{% endblock body %}
