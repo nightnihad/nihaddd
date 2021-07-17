@@ -1,8 +1,10 @@
-{% extends "index.html" %} {% block body %}
-<form action="">
+{% extends "index.html" %}
+{% load crispy_forms_tags %}
+{% block body %}
+<form action="" method='post'>
 
     {% csrf_token %}
-    {{form.as_p}}
+    {{form|crispy}}
     <button class="submit" type="btn btn-danger">tesdiqle</button>
 
 

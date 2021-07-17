@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404, redirect, render,HttpResponse
 from django.db.models import Model
 from bloh.models import *
 from customer.models import CustomerModel
-from .forms import Upgrade
+from .forms import Creat, Upgrade
 from django.forms.models import inlineformset_factory
 from django.contrib.auth.decorators import login_required
 # Create your views here.
@@ -19,25 +19,26 @@ def index(request):
 def statistika(request):
     return render(request,'statistika.html')
 @login_required(login_url='/')
-def create(request,id):
-    customer=CustomerModel.objects.get(id=id)
-    Entryformset=inlineformset_factory(CustomerModel,Addermodel,fields=('name','area','author','content','photo'),)
-    formset=Entryformset(queryset=Addermodel.objects.none(),instance=customer)
+def create(request):
+    form=Creat()
     if request.method =='POST':
-        formset=Entryformset(request.POST,instance=customer)
-        if formset.is_valid():
-            formset.save()
-            return redirect('index')
+        form=Creat(request.POST,request.FILES)
+        if form.is_valid():
+            article=form.save(commit=False)
+            article.author=request.user
+            article.save()
+            return redirect('/')
     context={
-        'formset':formset
+        'form':form
     }
     return render(request,'create.html',context)
+
 @login_required(login_url='/')
-def upgrade(request,id):
+def update(request,id):
     obyekt=Addermodel.objects.get(id=id)
     form=Upgrade(instance=obyekt)
     if request.method=='POST':
-            form=Upgrade(request.POST,instance=obyekt)
+            form=Upgrade(request.POST,request.FILES,instance=obyekt)
             if form.is_valid():
                 form.save()
                 return redirect('index')
@@ -45,7 +46,7 @@ def upgrade(request,id):
                 'form':form
             }
 
-            return render(request,'upgrade.html',mal)
+            return render(request,'update.html',mal)
 def delete(request,id):
     Entry=Addermodel.objects.filter(id=id)
     if request.method =='POST':
@@ -56,9 +57,11 @@ def delete(request,id):
     }
     return render(request,'delete.html',context)
 def dashboard(request,id):
-    Entri=Addermodel.objects.filter(id=id)
+    customer=CustomerModel.objects.get(id=id)
+    Entri=Addermodel.objects.filter(author=customer)
     context={
-        'Entri':Entri
+        'Entri':Entri,
+        'customer':customer
     }
     return render(request,'dashboard.html',context)
 

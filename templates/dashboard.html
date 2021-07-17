@@ -1,8 +1,16 @@
 {% extends "index.html" %}
 {% block body %}
+{% if Entri %}
 {% for Ent in Entri  %}
- <p>{{Ent.name}} </p>  
+<div class='container'>
+ <p>{{Ent.name}} </p> <a href="{% url 'blog:update' Ent.id %}" class='submit' type='btn btn-danger'>Güncəllə</a>  
  <p>{{Ent.author}}</p>
+ <br>
+</div>
 {% endfor %}
+{% else %}
+<p>Heç entriniz yoxdu</p>
+<a href="{% url 'blog:create' %}">Entri yazmaq üçün gedin</a>
+{% endif %}
 
 {% endblock body %}

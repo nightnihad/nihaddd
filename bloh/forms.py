@@ -6,3 +6,8 @@ class Upgrade(forms.ModelForm):
     class Meta:
         model=Addermodel
         fields='__all__'
+
+class Creat(forms.ModelForm):
+    class Meta:
+        model=Addermodel
+        fields=['name','area','photo','content']
