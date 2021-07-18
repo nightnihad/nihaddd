@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bloh',
     'customer',
+    'crispy_forms',
     #thirdpartyapp
     'ckeditor'
 ]
@@ -59,7 +60,7 @@ ROOT_URLCONF = 'yoxlanış.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates','static'],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -138,3 +139,5 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
     '/var/www/static/',
     ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

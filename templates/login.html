@@ -1,16 +1,15 @@
-{% load static %}
 <style>
 body {
     background: url('http://i.imgur.com/Eor57Ae.jpg') no-repeat fixed center center;
     background-size: cover;
     font-family: Montserrat;
 }
+
 .logo {
     width: 213px;
     height: 36px;
     margin: 30px auto;
 }
-
 
 .login-block {
     width: 320px;
@@ -100,16 +99,14 @@ body {
     {% endif %}
 </div>
 <div class="login-block">
-    <h1>Qeydiyyat</h1>
-    <form action="" method="post">
+    <h1>Giriş</h1>
+    <form action="" method="POST" enctype='multipart/form-data'>
     {% csrf_token %}
     {{form.username}}
-    {{form.email}}
-    {{form.password1}}
-    {{form.password2}}
-    <button class="btn btn-danger" type='submit' >Qeydiyyatdan Keç</button>
-<div class="d-flex justify-content-center links">
-Hesabınız var? <a  type='submit' class='btn btn-danger' href="{% url 'customer:login' %}" class="ml-2">Giriş</a>
-</div>
+    {{form.password}}
+    <button>Giriş et</button>
+    <hr>
+    <div class="d-flex justify-content-center links">
+Hesabınız yoxdur? <a href="{% url 'customer:register' %}" class="ml-2">Qeydiyyat</a>
 </form>
 </div>

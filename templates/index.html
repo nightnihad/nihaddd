@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-{% load static %}
+<!DOCTYPE html> {% load static %}
 <html class="menu">
 <html>
 
-<head>
-    
+<head>  
+<title>RegiWiki.com</title>
+
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="google" value="notranslate" />
@@ -13,8 +13,27 @@
 </head>
 
 <body>
-    {% include "includes/navbar.html" %} 
-    {% block body %}
+    {% include "includes/navbar.html" %}
+     {% block body %}
+     {% if messages %}
+<div class='alert alert-danger' role='alert'>
+    {% for message in messages %}
+    {{ message}}
+    {% endfor %}
+</div>
+{% endif %}
+
+    <div class="content">
+        <div class="container">
+            <div class="context">
+                {% if request.user.is_authenticated %} Giriş Yapılmış, {{request.user.username}} 
+                {% else %}
+                 Giriş Yapılmamış 
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
     {% endblock body %}
 
 </body>

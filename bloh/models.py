@@ -44,7 +44,7 @@ class AreaCategorymodel(models.Model):
         return self.name
     
 class Addermodel(models.Model):
-    name=models.CharField(max_length=20,null=True)
+    name=models.CharField(max_length=100,null=True)
     area=models.ForeignKey(AreaCategorymodel,on_delete=models.CASCADE,related_name='yazi')
     photo=models.ImageField(upload_to='images')
     content=RichTextField()
