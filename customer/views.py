@@ -13,6 +13,8 @@ def user(request):
     return render(request,'profil.html')
 @csrf_exempt
 def register(request):
+    if request.user.is_authenticated:
+        return redirect('/')
     form=RegisterForm()
     if request.method=='POST':
         form = RegisterForm(request.POST)
@@ -30,6 +32,8 @@ def register(request):
     return render(request,'register.html',{'form':form})
 @csrf_exempt
 def login(request):
+    if request.user.is_authenticated:
+        return redirect('/')
     form=LoginForm(request.POST or None)
     context={
             'form':form
