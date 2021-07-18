@@ -3,10 +3,11 @@
 {% if Entri %}
 {% for Ent in Entri  %}
 <div class='container'>
- <p>{{Ent.name}} </p> <a href="{% url 'blog:update' Ent.id %}" class='submit' type='btn btn-danger'>Güncəllə</a>  
- <p>{{Ent.author}}</p>
- <br>
+<p>{{Ent.author}}<br> {{Ent.content}}</p>
+<a href="{% url 'blog:update' Ent.id %}" class='btn btn-danger' type='submit'>Güncəllə</a> 
+<a href="{% url 'blog:delete' Ent.id %}" class='btn btn-danger' type='submit'>Sil</a> 
 </div>
+<br>
 {% endfor %}
 {% else %}
 <p>Heç entriniz yoxdu</p>

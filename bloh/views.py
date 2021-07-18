@@ -3,6 +3,7 @@ from django.db.models import Model
 from bloh.models import *
 from customer.models import CustomerModel
 from .forms import Creat, Upgrade
+from django.contrib import messages
 from django.forms.models import inlineformset_factory
 from django.contrib.auth.decorators import login_required
 # Create your views here.
@@ -10,12 +11,16 @@ def index(request):
     istifadeci=CustomerModel.objects.all()
     madel=Addermodel.objects.all()
     erazi=AreaCategorymodel.objects.all()
-    context={
-        'madel':madel,
-        'istifadeci':istifadeci,
-        'erazi' :erazi
-    }
-    return render(request,'index.html',context)
+    if request.method =='GET':
+        if request.user.is_authenticated:
+            context={
+            'madel':madel,
+            'istifadeci':istifadeci,
+            'erazi' :erazi
+            }
+            return render(request,'index.html',context)
+        messages.success(request,'İlk öncə qeydiyyatdan keçin')
+        return redirect('customer:login')
 def statistika(request):
     return render(request,'statistika.html')
 @login_required(login_url='/')
@@ -27,6 +32,7 @@ def create(request):
             article=form.save(commit=False)
             article.author=request.user
             article.save()
+            messages.success(request,'Yazı Yaradıldı')
             return redirect('/')
     context={
         'form':form
@@ -41,21 +47,25 @@ def update(request,id):
             form=Upgrade(request.POST,request.FILES,instance=obyekt)
             if form.is_valid():
                 form.save()
+                messages.success(request,'dəyişikliklər edildi')
                 return redirect('index')
-            mal={
-                'form':form
-            }
+    mal={
+    'form':form
+    }
 
-            return render(request,'update.html',mal)
+    return render(request,'update.html',mal)
+@login_required(login_url='/')
 def delete(request,id):
     Entry=Addermodel.objects.filter(id=id)
     if request.method =='POST':
         Entry.delete()
+        messages.success(request,'Başarıyla silindi')
         return redirect('index')
     context={
         'Entry': Entry
     }
     return render(request,'delete.html',context)
+@login_required(login_url='/')
 def dashboard(request,id):
     customer=CustomerModel.objects.get(id=id)
     Entri=Addermodel.objects.filter(author=customer)

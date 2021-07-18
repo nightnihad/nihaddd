@@ -8,7 +8,7 @@ app_name='customer'
 
 urlpatterns=[
     path('user/',user,name='user'),
-    path('register/',register,name='register'),
+    path('register',register,name='register'),
     path('login',login,name='login'),
     path('logout',logout,name='logout'),
     path('profil/<str:id>',profil,name='profil')
