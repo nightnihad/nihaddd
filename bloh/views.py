@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404, redirect, render,HttpResponse
 from django.db.models import Model
 from bloh.models import *
 from customer.models import CustomerModel
-from .forms import Creat, Upgrade
+from .forms import Accountsetting, Creat, Upgrade
 from django.contrib import messages
 from django.forms.models import inlineformset_factory
 from django.contrib.auth.decorators import login_required
@@ -66,12 +66,26 @@ def delete(request,id):
     }
     return render(request,'delete.html',context)
 @login_required(login_url='/')
-def dashboard(request,id):
-    customer=CustomerModel.objects.get(id=id)
+def dashboard(request):
+    customer=request.user
     Entri=Addermodel.objects.filter(author=customer)
     context={
         'Entri':Entri,
         'customer':customer
     }
     return render(request,'dashboard.html',context)
+@login_required(login_url='/')
+def account_settings(request):
+    users=request.user
+    form=Accountsetting(instance=users)
+    if request.method=='POST':
+        form=Accountsetting(request.POST,request.FILES,instance=users)
+        if form.is_valid():
+            form.save()
+            messages.success(request,'profil dəyişikliyi edildi')
+            return redirect('customer:profil')
+    can={
+        'form':form
+    }
 
+    return render(request,'account_settings.html',can)

@@ -1,4 +1,79 @@
 {% extends "index.html" %}
 {% block body %}
+<style>
+    body{
+        color: tomato
+
+    }
+
+    .entry-pic{
+        max-width: 80px;
+        max-height:80px;
+        margin: 0 auto;
+        border-radius: 50%;
+    }
+
+    .profile{
+        max-width: 150px;
+        max-height:150px;
+        margin: 0 auto;
+        border-radius: 50%;
+    }
+}
+</style>
+<div class= 'container'>
+{% if request.user.avatar %}
+    <img class="profile" src="{{request.user.avatar.url}}">
+{% else %}
+     <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+{% endif %}
+<h2>{{'AD:'}} {{ user}}</h2>
+<br>
+<hr>
+{{'ENTRİ sayı:'}} {{entricount}}
+<hr>
+<br>
+{% if comment %}
+{% for commen in comment %}
+{{'COMMENT:'}}
+<br>
+{{commen.content}}
+<br>
+<hr>
+{% endfor %}
+{% else %}
+{{'COMMENT YOXDUR:'}}
+{% endif %}
+<br>
+<hr>
+{{'COMMENT sayı:'}} {{comment.count}}
+<br>
+<hr>
+</div>
+<br>
+
+<div class ='container'>
+{{'ENTRİ:'}}
+<hr>
+{% for entr in entri %}
+<a  href={% url "blog:update" entr.id %}> {{entr.name}}</a> <br>{{entr.content}}<br><img  class="entry-pic" src="{{entr.photo.url}}" >
+<hr>
+<br>
+{% endfor %}
+<!--{% for entr in entri %}
+<img class="entry-pic" src="{{entr.photo.url}}" >
+<br>
+<hr>
+{% endfor %}-->
+
+<!--{% if request.user.avatar %}
+    <div class="profile_pic">
+        <img src="{{request.user.avatar.url}}">
+    </div>
+{% else %}
+    <h3>Profil sekliniz yoxdur</h3>
+{% endif %}-->
+</div>
+
 
 {% endblock body %}

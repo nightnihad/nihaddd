@@ -1,0 +1,14 @@
+{% extends "index.html" %}
+{% load crispy_forms_tags %}
+{% block body %}
+<form action="." method="post" accept-charset="utf-8" enctype="multipart/form-data">
+
+    {% csrf_token %}
+<div class='container'>
+    {{form|crispy}}
+    <button class="submit" type="btn btn-danger">Təsdiqlə</button>
+</div>
+
+
+</form>
+{% endblock body %}

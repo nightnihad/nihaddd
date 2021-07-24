@@ -4,7 +4,6 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 class CustomerModel(AbstractUser):
-    avatar=models.ImageField(upload_to='avatar')
     id = models.AutoField(primary_key=True)
     class Meta:
         db_table='İstifadəçilər'

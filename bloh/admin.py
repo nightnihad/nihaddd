@@ -12,5 +12,5 @@ class AreaAdmin(admin.ModelAdmin):
 
 @admin.register(Commentarticle)
 class Commentadmin(admin.ModelAdmin):
-    list_display=('author','wdate')
+    list_display=('author','wdate','entry')
     search_fields=['name']

@@ -23,7 +23,7 @@
                         <li><a href="#">Əlaqə</a></li>
                         <li><a href="#">Təsadüfi</a></li>
                         <li><a href="#">Gündəm</a></li>
-                        <li><a href="{% url 'blog:dashboard' user.id %}">Yazılar</a></li>
+                        <li><a href="{% url 'blog:dashboard' %}">Yazılar</a></li>
                     </ul>
                     <ul class="nav navbar-nav">
                         <li>
@@ -39,7 +39,7 @@
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="{% url 'customer:profil' user.id %}"><span class="glyphicon glyphicon-user"></span> Profil</a></li>
+                        <li><a href="{% url 'customer:profil' %}"><span class="glyphicon glyphicon-user"></span> Profil</a></li>
                         <li><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-log-in"></span> Əlavə tənzimləmələr<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                             <li><a href="#">{{user.username}}</a></li>
