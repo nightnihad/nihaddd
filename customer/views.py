@@ -57,8 +57,6 @@ def logout(request):
 def profil(request):
     user=request.user
     entri=Addermodel.objects.filter(author=user)
-    
-    
     entricount=entri.count()
     comment=Commentarticle.objects.filter(author=user)
     commentcount=comment.count()

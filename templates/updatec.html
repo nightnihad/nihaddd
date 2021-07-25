@@ -1,0 +1,13 @@
+{% extends "index.html" %}
+{% load crispy_forms_tags %}
+{% block body %}
+<form action="" method='post'>
+
+    {% csrf_token %}
+    {{formm|crispy}}
+    <button class="submit" type="btn btn-danger">tesdiqle</button>
+
+
+
+</form>
+{% endblock body %}

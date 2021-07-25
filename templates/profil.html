@@ -2,7 +2,7 @@
 {% block body %}
 <style>
     body{
-        color: tomato
+        color: yellow
 
     }
 
@@ -33,19 +33,7 @@
 {{'ENTRİ sayı:'}} {{entricount}}
 <hr>
 <br>
-{% if comment %}
-{% for commen in comment %}
-{{'COMMENT:'}}
-<br>
-{{commen.content}}
-<br>
-<hr>
-{% endfor %}
-{% else %}
-{{'COMMENT YOXDUR:'}}
-{% endif %}
-<br>
-<hr>
+
 {{'COMMENT sayı:'}} {{comment.count}}
 <br>
 <hr>
@@ -54,12 +42,35 @@
 
 <div class ='container'>
 {{'ENTRİ:'}}
-<hr>
+<br>
 {% for entr in entri %}
-<a  href={% url "blog:update" entr.id %}> {{entr.name}}</a> <br>{{entr.content}}<br><img  class="entry-pic" src="{{entr.photo.url}}" >
+<a  class='btn btn-primary' href={% url "blog:update" entr.id %}> {{entr.name}}</a><br>{{entr.content}}<br> <img  class="entry-pic" src="{{entr.photo.url}}" ><hr>
+
+{% endfor %}
+<hr>
+</div>
+<br>
+<div class='container'>
+{% if comment %}
+{% for commen in comment %}
+{{'Entri:'}}
+<br>
+<a  href={% url "blog:update" commen.entry.id %}> {{commen.entry.name}}</a> <br>{{commen.entry.content}}<br>
+<br>
+{{'Yazıya qarşı yazılan commentlər:'}}<br>{{commen.content}}<br> 
+<a class='btn btn-danger' class='submit' href={% url "blog:deletec" commen.id %}>Sil</a> <a class='btn btn-primary' class='submit' href={% url "blog:updatec" commen.id %}>Güncəllə</a>
+
+
+<br>
+<hr>
+{% endfor %}
+{% else %}
+{{'COMMENT YOXDUR:'}}
+{% endif %}
 <hr>
 <br>
-{% endfor %}
+</div>
+
 <!--{% for entr in entri %}
 <img class="entry-pic" src="{{entr.photo.url}}" >
 <br>
@@ -73,7 +84,7 @@
 {% else %}
     <h3>Profil sekliniz yoxdur</h3>
 {% endif %}-->
-</div>
+
 
 
 {% endblock body %}

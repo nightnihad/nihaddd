@@ -1,0 +1,11 @@
+{% extends "index.html" %}
+{% block body %}
+<form action="" method='POST'>
+    {% csrf_token %}
+    {% for  com in comment %}
+    <p>{{com.author}} adlı yazıçının {{com.entry}}-barəsində commentini silmek istiyirsiz?</p>
+    <button class='btn btn-danger'>Bəli</button>
+    <a class='btn btn-danger' href="{% url 'blog:index' %}">Xeyr</a>
+    {% endfor %}
+</form>
+{% endblock body %}

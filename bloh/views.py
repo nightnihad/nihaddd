@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404, redirect, render,HttpResponse
 from django.db.models import Model
 from bloh.models import *
 from customer.models import CustomerModel
-from .forms import Accountsetting, Creat, Upgrade
+from .forms import Accountsetting, Commentform, Creat, Upgrade
 from django.contrib import messages
 from django.forms.models import inlineformset_factory
 from django.contrib.auth.decorators import login_required
@@ -89,3 +89,36 @@ def account_settings(request):
     }
 
     return render(request,'account_settings.html',can)
+@login_required(login_url='/')
+def commentcreate(request):
+    form1=Commentform()
+    if request.method=='POST':
+        form1=Commentform(request.POST)
+        if form1.is_valid():
+            form1.save()
+            return redirect('customer:profil')
+    conten={
+            'form1':form1
+        }
+    return render(request,'commentcreate.html',conten)
+def updatec(request,id):
+    comm=Commentarticle.objects.get(id=id)
+    formm=Commentform(instance=comm)
+    if request.method =='POST':
+        formm=Commentform(request.POST,instance=comm)
+        if formm.is_valid():
+            formm.save()
+            return redirect('customer:profil')
+    terkibb={
+    'formm':formm
+    }
+    return render(request,'updatec.html',terkibb)
+def deletec(request,id):
+    comment=Commentarticle.objects.filter(id=id)
+    if request.method=='POST':
+        comment.delete()
+        return redirect('customer:profil')
+    terkib={
+            'comment':comment
+        }
+    return render(request,'deletec.html',terkib)

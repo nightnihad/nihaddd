@@ -61,7 +61,7 @@ class Addermodel(models.Model):
 
 class Commentarticle(models.Model):
     entry=models.ForeignKey(Addermodel,on_delete=models.CASCADE,related_name='comment',null=True,blank=True)
-    content=models.TextField(max_length=2000)
+    content=RichTextField(null=True)
     author=models.ForeignKey('customer.CustomerModel',on_delete=models.CASCADE,related_name='comments')
     wdate=models.DateTimeField(auto_now_add=True)
     class Meta:
