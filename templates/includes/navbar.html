@@ -15,11 +15,11 @@
                         <li class=""><a href="{% url 'blog:index' %}">Ana səhifə</a></li>
                         <li><a href="#" class="dropdown-toggle" data-toggle="dropdown">Haqqımızda <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                            <li><a href="#">Biz kimik?</a></li>
+                            <li><a href="{% url 'blog:about' %}">Biz kimik?</a></li>
                             <li><a href="#">Karyera planlarımız</a></li>
                             </ul>
                         </li>
-                        <li><a href="#">Məqalə</a></li>
+                        <li><a href="{% url 'blog:job' %}">Məqalə</a></li>
                         <li><a href="#">Əlaqə</a></li>
                         <li><a href="#">Təsadüfi</a></li>
                         <li><a href="#">Gündəm</a></li>
@@ -27,11 +27,11 @@
                     </ul>
                     <ul class="nav navbar-nav">
                         <li>
-                            <form action="" class="navbar-form">
+                            <form action="{% url 'blog:dashboard' %}" class="navbar-form">
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <input type="search" name="search" id="" placeholder="söz6 evimiz,timidus ənkəmiz" class="form-control">
-                                        <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+                                        <input type="search" name='sorgu' id="" placeholder="söz6 evimiz,timidus ənkəmiz" class="form-control">
+                                        <button type='submit' class="btn btn-info">Axtar</button>
                                     </div>
                                 </div>
                             </form>

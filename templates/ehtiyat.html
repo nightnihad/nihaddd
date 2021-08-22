@@ -223,3 +223,52 @@ body{
         </div>
     </div>
     -->
+
+    <div class= 'container'>
+{% if request.user.avatar %}
+    <img class="profile" src="{{request.user.avatar.url}}">
+{% else %}
+     <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+{% endif %}
+<h2>{{'AD:'}} {{ user}}</h2>
+<br>
+<hr>
+{{'ENTRİ sayı:'}} {{entricount}}
+<hr>
+<br>
+
+{{'COMMENT sayı:'}} {{comment.count}}
+<br>
+<hr>
+</div>
+<br>
+
+<div class ='container'>
+{{'ENTRİ:'}}
+<br>
+{% for entr in entri %}
+<a  class='btn btn-primary' href={% url "blog:update" entr.id %}> {{entr.name}}</a><br>{{entr.content}}<br> <img  class="entry-pic" src="{{entr.photo.url}}" ><hr>
+
+{% endfor %}
+<hr>
+</div>
+<br>
+<div class='container'>
+{% if comment %}
+{% for commen in comment %}
+{{'Entri:'}}
+<br>
+<a  href={% url "blog:update" commen.entry.id %}> {{commen.entry.name}}</a> <br>{{commen.entry.content}}<br>
+<br>
+{{'Yazıya qarşı yazılan commentlər:'}}<br>{{commen.content}}<br> 
+<a class='btn btn-danger' class='submit' href={% url "blog:deletec" commen.id %}>Sil</a> <a class='btn btn-primary' class='submit' href={% url "blog:updatec" commen.id %}>Güncəllə</a>
+
+
+<br>
+<hr>
+{% endfor %}
+{% else %}
+{{'COMMENT YOXDUR:'}}
+{% endif %}
+<hr>
+<br>

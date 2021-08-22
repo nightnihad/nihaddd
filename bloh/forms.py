@@ -25,7 +25,7 @@ class Accountsetting(forms.ModelForm):
 class Commentform(forms.ModelForm):
     class Meta:
         model=Commentarticle
-        fields='__all__'
+        fields='__all__'   
         widgets = {
         'content': forms.fields.TextInput(attrs={'placeholder': 'content'})
 

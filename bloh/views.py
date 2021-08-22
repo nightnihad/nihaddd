@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render,HttpResponse
 from django.db.models import Model
 from bloh.models import *
@@ -7,6 +8,7 @@ from django.contrib import messages
 from django.forms.models import inlineformset_factory
 from django.contrib.auth.decorators import login_required
 # Create your views here.
+
 def index(request):
     istifadeci=CustomerModel.objects.all()
     madel=Addermodel.objects.all()
@@ -23,6 +25,8 @@ def index(request):
         return redirect('customer:login')
 def statistika(request):
     return render(request,'statistika.html')
+
+    
 @login_required(login_url='/')
 def create(request):
     form=Creat()
@@ -34,10 +38,10 @@ def create(request):
             article.save()
             messages.success(request,'Yazı Yaradıldı')
             return redirect('/')
-    context={
+    contex={
         'form':form
     }
-    return render(request,'create.html',context)
+    return render(request,'create.html',contex)
 
 @login_required(login_url='/')
 def update(request,id):
@@ -68,7 +72,13 @@ def delete(request,id):
 @login_required(login_url='/')
 def dashboard(request):
     customer=request.user
+    sorgu=request.GET.get('sorgu')
     Entri=Addermodel.objects.filter(author=customer)
+    if sorgu:
+        Entri = Entri.filter(
+            Q(name__icontains=sorgu) |
+            Q(content__icontains=sorgu)
+        ).distinct()
     context={
         'Entri':Entri,
         'customer':customer
@@ -91,6 +101,7 @@ def account_settings(request):
     return render(request,'account_settings.html',can)
 @login_required(login_url='/')
 def commentcreate(request):
+    entry=request
     form1=Commentform()
     if request.method=='POST':
         form1=Commentform(request.POST)

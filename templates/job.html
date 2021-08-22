@@ -1,0 +1,157 @@
+{% extends "index.html" %}
+{% block body %}
+<div class='container'>
+Django Nedir?
+Halil Özel
+
+Halil Özel
+
+May 29, 2018·6 min read
+
+Merhabalar Arkadaşlar,
+
+Bugünkü yazımda sizlere Python programlama dilinin web kısmında kullanılan bir framework’ü olan Djangodan bahsedeceğim. Django ile tanışmam ilk iş deneyimimde olmuştu. Hazırsanız haydi başlayalım :)
+
+    Django, Python Programlama Dili için hazırlanmış ve BSD lisansı ile lisanslanmış yüksek seviyeli bir web çatısıdır(framework). Basit kurulumu ve kullanımı, detaylı hata raporu sayfaları ve sunduğu yepyeni arayüz ile diğer sunucu yazılımı ve frameworklerden kendini ayrıştırmaktadır. İsmi, caz gitaristi Django Reinhardt’tan gelmektedir.
+    Django Projesi’nin temel amacı, karmaşık bir yapıda olan web uygulamalarının kullanımını kolaylaştırmaktır. Django yeniden kullanılabilirlik, modülerlik, hızlı geliştirme süreci politikasına sahip bir yapıda tasarlanmaktadır.
+    Django da ayrıca her projeye ait temel kayıt ekleme, silme, düzenleme ve güncelleme fonksiyonlarını bünyesinde barındıran dinamik bir yönetim paneli sağlar. Karmaşık veritabanlarından kurtulmak isteyenler için rahat kullanışlı bir web çatısıdır. Şiddetle tavsiye edilir :)
+    Django, Python programlama dili ile yazılmış bir MVT mimarı yapısını kullanan, yüksek seviyeli ve açık kaynaklı(open source) bir web çatısıdır. MVT dediğimiz yapı ise Model, View ve Template şeklindedir. Django’nun geliştirme aşamasında bu yapıya dikkat edilerek kodlandığını bizlere göstermektedir.
+
+MVT Nedir ?
+
+Model-View-Template (MVT) MVC’den biraz farklıdır. Aslında, iki model arasındaki temel fark, Django’nun bizzat, Kontrolör(Controller) kısmına (Model ve Görünüm arasındaki etkileşimleri kontrol eden Yazılım Kodu) dikkat çekerek, bizi şablonla baş başa bırakmasıdır. Şablon, Django Şablon Dili (DTL) ile karıştırılmış bir HTML dosyasıdır. Geliştirici modeli sağlar, görünüm ve şablon daha sonra onu bir URL’le eşler ve Django kullanıcıya yapıyı sunmak için işlemi tamamlar.
+Neden Django öğrenmeliyim ?
+
+Django web çatısını neden kullanmalıyım sorusunun cevaplarını aşağıda listeledim :
+
+1- Django basit bir şekilde kurulabilir ve rahatlıkla kullanılabilir.
+
+2- Detaylı bir şekilde hata raporları vermektedir. Detaylı bir şekilde verilen hataların arasından sorunu rahatlıkla çözmek daha kolay olmaktadır. Bu açıdan bakıldığında PHP diline göre hata raporundaki detay daha fazladır.
+
+3- Genişletilebilir bir yönetim paneline sahiptir. Django kurulduğu vakit kendine ait bir admin paneli gelmektedir. İlk başlarda temel işlemlerde oldukça işimize yarayan bu paneli istek ve arzularımıza göre geliştirebiliriz.
+
+4- Django kendini sürekli yenileyen bir Şablona sahiptir.
+
+5- Django güvenlik açısından oldukça iyi bir seviyede olan bir framework’dür.
+Django’yu Kullanan Web Siteleri
+
+Django’yu kullanan ünlü web sitelerini aşağıda listeledim :
+
+    Disqus
+    Instagram
+    Knight Foundation
+    MacArthur Foundation
+    Mozilla
+    National Geographic
+    Open Knowledge Foundation
+    Pinterest
+    Open Stack
+
+25 of the Most Popular Python and Django Websites
+We at Shoop are proud of the fact that we are built with Python on top of the Django web framework - and we are not…
+
+www.shuup.com
+
+Yukarıdaki adresten ise Python ve Django kullanan en popüler 25 web sitesi derlenmiştir. İncelemekte yarar var bence :)
+Django Kurulumu
+
+Django Kurulumunu güzel bir şekilde anlatmış olan siteyi kaynak olarak ekliyorum. Tane tane anlatılmış. Oradaki adımları takip ederek rahatlıkla Django’yu bilgisayarınıza yükleyebilirsiniz.
+Ubuntu(Linux) Django Kurulumu (Pip,Virtualenv)
+Django'nun Kurulumu Genelde işletim sistemi kullanıcıları Windows ve Linux kullanıcıların olduğunu biliyoruz. Kurulumu…
+
+www.python.tc
+Windows Django Kurulumu
+Django'nun Kurulumu Önceki konu : Daha önceki makalede, Ubuntu(linux) için kurulumunu anlattık. Bu makalede windows…
+
+www.python.tc
+
+Ekstra Django ile ilgili kaynakça bölümünde gerekli sitelerden ve videolardan yararlanarak kurulumları yapabilirsiniz.
+Djangoda Projeye Oluşturma
+
+Projemizi oluşturmadan önce kurulum işlemlerinizi tamamladığınızı varsayarak işlemleri yapmaya başlıyoruz.
+
+Öncelikle çalışma dizinimizi belirliyoruz.
+
+Çalışma konumum : /home/halil
+
+Virtualenv kullanarak kuracağımız sanal ortam için MacOs veya Linux kullananlar Terminal ekranından, Windows kullananlar ise CMD ekranından bu işlemleri yapmaları gerekir.
+
+Virtualenv kurulumu için aşağıdaki işlemleri takip edeceğiz :
+
+1- Öncelikle işlemleri yapacağımız dizine gidiyoruz.
+
+cd /home/halil
+
+2- İşlemleri yapacağımız dizine girdiğimiz için artık sanal ortamı kurabiliriz.
+
+virtualenv -p python3 My_Project
+
+Python3x versiyonu kullanılarak , “My_Project” adlı klasör oluşturuldu. Gerekli kütüphaneler yardımıyla çalışma ortamımız oluştu.
+
+Sanal ortamımızı oluşturduğumuza göre artık aktif ederek Djangoyu kurabiliriz.
+
+cd My_Project/
+
+Proje dosyamıza gittik.
+
+source bin/activate
+
+Proje dosyamızı aktif ettik. MacOS ve Linux için kullanılır.
+
+Scripts\activate
+
+Windows işletim sisteminde projemizi aktif ettik.
+
+Aktifleştirme işlemini tamamladığımıza göre artık pip komutu yardımıyla kurulumuzu tamamlayabiliriz.
+
+pip3 install django
+
+pip komutu yardımıyla Django’yu kurduk. MacOs ve Linux kullanıcıları için bin dizinine gidip artık proje dosyasını oluşturacağız. Windows kullanıcıları Scripts dosyasını gidip dosyaları oluşturabilirsiniz.
+
+cd bin/
+
+Projeyi oluşturacağımız dizine gittik.
+
+python3 django-admin.py startproject My_Blog
+
+My_Blog adında uygulamamızı oluşturduk.
+
+Şimdi ise oluşturulan My_Blog yapısını inceleyelim.
+My_Blog/
+__init__.py
+settings.py
+urls.py
+wsgi.py
+manage.py
+
+    My_Blog/ : Bu klasör projeye ait tüm dosya ve diğer klasörleri içermektedir. Bu klasör içerisinde __init__.py, settings.py, urls.py ve wsgi.py dosyaları oluşturulur. Temel işlemlerin yapıldığı bölümdür.
+    __init__.py : Oluşturulan My_Blog klasörünün paket klasörü olarak kullanılan boş bir dosyadır. Bu dosya içerisinde hiç birşey yazılamaz ve oynama yapılamaz.
+    settings.py : Django projeleri ile ilgili yapılandırmaların bulunduğu dosyadır. Tüm ayarların bulunduğu dosyadır.
+    urls.py : Projeye ait adresler bulunmaktadır. Başlangıçta boş olan bu dosya, sitemizde aktif olacak url parametrelerini belirleyecektir. Belirlenen url yapıları bu dosyaya eklenmektedir.
+    wsgi.py : Django geliştirme sunucusu için WSGI (Web Server Gateway Interface) uygulamasını içerir. Bu dosya içerisine herhangi birşey yazılmaz. Aynı __init__.py dosyası gibi yazılma ve değiştirme işlemleri yapılmamaktadır.
+    manage.py : Django projeleri ile etkileşim oluşturmak için kullanılır. Geliştirme sunucusunu başlatmak için kullanılmaktadır. Bu dosya hiçbir zaman düzenlenemez. Teşbihte hata olmaz : Kilitli bir yapısı vardır.
+
+Projeye ait temel dosyaları öğrendiğimize göre artık proje dizinine geçip sunucuyu başlatabiliriz.
+
+cd My_Project/bin/My_Blog
+
+Projeyi başlatmak için manage.py adlı dosyanın bulunduğu konuma gittik.
+
+python3 manage.py migrate
+
+Bir defalığına veritabını dosyalarını ayarladık. manage.py adlı dosyanın bulunduğu konuma girdik.
+
+python3 manage.py runserver
+
+runserver komutu ile sitemiz çalışmaya başladı, sitemize girmek için local IP : http://127.0.0.1:8000/ yazarak aşağıdaki görüntüyü elde ediyoruz.
+
+Proje oluşturma esnasında default olarak gelen “admin” panelimiz artık mevcuttur. Bu yapıyı incelemek için aşağıdaki url’yi yazmak gerekir.
+
+Admin panel giriş : http://127.0.0.1:8000/admin
+
+Django’da geliştirme sunucusu ön tanımlı olarak yerel ağ arayüzünden 127.0.0.1(localhost) 8000 portunu dinlemektedir. İstediğiniz gibi protu değiştirip kullanabilirsiniz.
+Django İle İlgili Kaynaklar
+
+Django ile ilgili ilk başta Resmi sitesindeki dökümanı takip etmenizi öneririm. En güncel anlatım orada mevcuttur.
+</div>
+{% endblock body %}
