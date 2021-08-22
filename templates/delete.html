@@ -4,7 +4,7 @@
     {% csrf_token %}
     {% for enter  in Entry %}
     <p>{{enter.author}} adlı yazıçının {{enter.name}}-adlı yazısını silmek istiyirsiz?</p>
-    <button class='btn btn-danger'>Bəli</button>
+    <button class='btn btn-danger' type='submit'>Bəli</button>
     <a class='btn btn-danger' href="{% url 'blog:index' %}">Xeyr</a>
     {% endfor %}
 </form>

@@ -1,3 +1,4 @@
+from customer.models import CustomerModel
 from django.db import models
 from ckeditor.fields import RichTextField
 from autoslug.fields import AutoSlugField
@@ -59,8 +60,8 @@ class Addermodel(models.Model):
         return self.name
 
 class Commentarticle(models.Model):
-    entry=models.ForeignKey(Addermodel,on_delete=models.CASCADE,related_name='comment')
-    content=models.TextField(max_length=2000)
+    entry=models.ForeignKey(Addermodel,on_delete=models.CASCADE,related_name='comment',null=True,blank=True)
+    content=RichTextField(null=True)
     author=models.ForeignKey('customer.CustomerModel',on_delete=models.CASCADE,related_name='comments')
     wdate=models.DateTimeField(auto_now_add=True)
     class Meta:

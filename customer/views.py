@@ -1,11 +1,11 @@
 from django.core.exceptions import ValidationError
 from django.shortcuts import redirect, render,HttpResponse
-from django.contrib.auth.models import User
 from .models import CustomerModel
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.forms import UserCreationForm
 from .forms import  LoginForm,RegisterForm
-from django.template import RequestContext
+from django.contrib.auth.decorators import login_required
+from bloh.models import *
 from django.contrib import messages
 from django.contrib.auth import login as auth_login,authenticate,logout as auth_logout
 # Create your views here.
@@ -21,11 +21,12 @@ def register(request):
         if form.is_valid():
             username = form.cleaned_data.get("username")
             password1= form.cleaned_data.get("password1")
-            newUser =CustomerModel(username =username)
+            email=form.cleaned_data.get('email')
+            newUser =CustomerModel(username =username,email=email)
             newUser.set_password(password1)
             newUser.save()
             auth_login(request,newUser)
-            messages.success(request,"XOŞ GƏLMİSİNİZ ")
+            messages.success(request,"XOŞ GƏLMİSİNİZ " + username)
             return redirect('/')
         messages.success(request,'Qeyd olunmadınız')
         return render(request,'register.html',{'form':form})
@@ -52,7 +53,20 @@ def logout(request):
     auth_logout(request)
     messages.success(request,'Çıxış etdiniz',)
     return redirect('/')
-def profil(request,id):
+@login_required(login_url='/')
+def profil(request):
+    user=request.user
+    entri=Addermodel.objects.filter(author=user)
+    entricount=entri.count()
+    comment=Commentarticle.objects.filter(author=user)
+    commentcount=comment.count()
+    question={
+        'user':user,
+        'entri':entri,
+        'entricount':entricount,
+        'comment': comment,
+        'commentcount': commentcount
+    }
 
-    return render(request,'profil.html')
+    return render(request,'profil.html',question)
 

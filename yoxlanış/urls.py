@@ -27,4 +27,4 @@ urlpatterns = [
     path('',index,name='index'),
     path('',include('bloh.urls')),
     path('',include('customer.urls')),
-]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

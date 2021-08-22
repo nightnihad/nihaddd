@@ -132,6 +132,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL='customer.CustomerModel'
 
 
+MEDIA_URL = "/images/"
+MEDIA_ROOT = os.path.join(BASE_DIR,'/images/')
+
 
 STATIC_URL='/static/'
 
@@ -141,3 +144,4 @@ STATICFILES_DIRS = [
     ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+

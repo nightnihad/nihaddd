@@ -15,23 +15,23 @@
                         <li class=""><a href="{% url 'blog:index' %}">Ana səhifə</a></li>
                         <li><a href="#" class="dropdown-toggle" data-toggle="dropdown">Haqqımızda <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                            <li><a href="#">Biz kimik?</a></li>
+                            <li><a href="{% url 'blog:about' %}">Biz kimik?</a></li>
                             <li><a href="#">Karyera planlarımız</a></li>
                             </ul>
                         </li>
-                        <li><a href="#">Məqalə</a></li>
+                        <li><a href="{% url 'blog:job' %}">Məqalə</a></li>
                         <li><a href="#">Əlaqə</a></li>
                         <li><a href="#">Təsadüfi</a></li>
                         <li><a href="#">Gündəm</a></li>
-                        <li><a href="{% url 'blog:dashboard' user.id %}">Yazılar</a></li>
+                        <li><a href="{% url 'blog:dashboard' %}">Yazılar</a></li>
                     </ul>
                     <ul class="nav navbar-nav">
                         <li>
-                            <form action="" class="navbar-form">
+                            <form action="{% url 'blog:dashboard' %}" class="navbar-form">
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <input type="search" name="search" id="" placeholder="söz6 evimiz,timidus ənkəmiz" class="form-control">
-                                        <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+                                        <input type="search" name='sorgu' id="" placeholder="söz6 evimiz,timidus ənkəmiz" class="form-control">
+                                        <button type='submit' class="btn btn-info">Axtar</button>
                                     </div>
                                 </div>
                             </form>
@@ -39,12 +39,13 @@
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="{% url 'customer:profil' user.id %}"><span class="glyphicon glyphicon-user"></span> Profil</a></li>
+                        <li><a href="{% url 'customer:profil' %}"><span class="glyphicon glyphicon-user"></span> Profil</a></li>
                         <li><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-log-in"></span> Əlavə tənzimləmələr<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                            <li><a href="#">{{user.username}}</a></li>
+                            <li><a href=" {% url 'customer:profil' %}"> {{user.username}}</a></li>
                             {% if user.is_authenticated %}
                             <li><a href="{% url 'customer:logout' %}">Çıxış</a></li>
+                            <li><a href="{% url 'blog:account_settings' %}">Profil tənzimləmələri</a></li>
                             {% else %}
                             <li><a href="{% url 'customer:login' %}">Giriş</a></li>
                             <li><a href="{% url 'customer:register' %}">Qeydiyyat</a></li>

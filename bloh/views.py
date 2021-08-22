@@ -1,12 +1,14 @@
+from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render,HttpResponse
 from django.db.models import Model
 from bloh.models import *
 from customer.models import CustomerModel
-from .forms import Creat, Upgrade
+from .forms import Accountsetting, Commentform, Creat, Upgrade
 from django.contrib import messages
 from django.forms.models import inlineformset_factory
 from django.contrib.auth.decorators import login_required
 # Create your views here.
+
 def index(request):
     istifadeci=CustomerModel.objects.all()
     madel=Addermodel.objects.all()
@@ -23,6 +25,8 @@ def index(request):
         return redirect('customer:login')
 def statistika(request):
     return render(request,'statistika.html')
+
+    
 @login_required(login_url='/')
 def create(request):
     form=Creat()
@@ -34,10 +38,10 @@ def create(request):
             article.save()
             messages.success(request,'Yazı Yaradıldı')
             return redirect('/')
-    context={
+    contex={
         'form':form
     }
-    return render(request,'create.html',context)
+    return render(request,'create.html',contex)
 
 @login_required(login_url='/')
 def update(request,id):
@@ -66,12 +70,66 @@ def delete(request,id):
     }
     return render(request,'delete.html',context)
 @login_required(login_url='/')
-def dashboard(request,id):
-    customer=CustomerModel.objects.get(id=id)
+def dashboard(request):
+    customer=request.user
+    sorgu=request.GET.get('sorgu')
     Entri=Addermodel.objects.filter(author=customer)
+    if sorgu:
+        Entri = Entri.filter(
+            Q(name__icontains=sorgu) |
+            Q(content__icontains=sorgu)
+        ).distinct()
     context={
         'Entri':Entri,
         'customer':customer
     }
     return render(request,'dashboard.html',context)
+@login_required(login_url='/')
+def account_settings(request):
+    users=request.user
+    form=Accountsetting(instance=users)
+    if request.method=='POST':
+        form=Accountsetting(request.POST,request.FILES,instance=users)
+        if form.is_valid():
+            form.save()
+            messages.success(request,'profil dəyişikliyi edildi')
+            return redirect('customer:profil')
+    can={
+        'form':form
+    }
 
+    return render(request,'account_settings.html',can)
+@login_required(login_url='/')
+def commentcreate(request):
+    entry=request
+    form1=Commentform()
+    if request.method=='POST':
+        form1=Commentform(request.POST)
+        if form1.is_valid():
+            form1.save()
+            return redirect('customer:profil')
+    conten={
+            'form1':form1
+        }
+    return render(request,'commentcreate.html',conten)
+def updatec(request,id):
+    comm=Commentarticle.objects.get(id=id)
+    formm=Commentform(instance=comm)
+    if request.method =='POST':
+        formm=Commentform(request.POST,instance=comm)
+        if formm.is_valid():
+            formm.save()
+            return redirect('customer:profil')
+    terkibb={
+    'formm':formm
+    }
+    return render(request,'updatec.html',terkibb)
+def deletec(request,id):
+    comment=Commentarticle.objects.filter(id=id)
+    if request.method=='POST':
+        comment.delete()
+        return redirect('customer:profil')
+    terkib={
+            'comment':comment
+        }
+    return render(request,'deletec.html',terkib)
